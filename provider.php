@@ -2,13 +2,12 @@
 session_start();
 require_once 'db.php';
 
-// نفرض أن المستخدم مقدم خدمة مسجل دخول
 $provider_id = $_SESSION['user_id'] ;
 
 // رسالة بعد الحذف أو الخطأ
 $message = "";
 
-// ✅ حذف الخدمة عند الضغط على زر الحذف
+//  حذف الخدمة عند الضغط على زر الحذف
 if (isset($_GET['delete'])) {
     $service_id = intval($_GET['delete']);
     $deleteQuery = "DELETE FROM services WHERE id = $service_id AND provider_id = $provider_id";
@@ -19,7 +18,7 @@ if (isset($_GET['delete'])) {
     }
 }
 
-// ✅ جلب الخدمات من قاعدة البيانات
+//  جلب الخدمات من قاعدة البيانات
 $query = "SELECT * FROM services WHERE provider_id = $provider_id";
 $result = mysqli_query($conn, $query);
 ?>
@@ -104,11 +103,10 @@ main { padding:30px; flex: 1;  }
   </div>
 </header>
 <script>
-    // إخفاء الرسالة بعد 5 ثواني
     setTimeout(() => {
         const msg = document.querySelector('.message');
         if (msg) msg.style.display = 'none';
-    }, 3000);
+    }, 2000);
 </script>
 <main>
 

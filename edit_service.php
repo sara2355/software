@@ -2,12 +2,11 @@
 session_start();
 require_once 'db.php';
 
-$provider_id = $_SESSION['user_id'] ?? 1; // رقم مقدم الخدمة المسجل
+$provider_id = $_SESSION['user_id'] ; // رقم مقدم الخدمة المسجل
 
 // رسالة تأكيد بعد التحديث
 $message = "";
 
-// 1️⃣ جلب بيانات الخدمة إذا جاء id عبر GET
 if (isset($_GET['id'])) {
     $service_id = intval($_GET['id']);
     $query = "SELECT * FROM services WHERE id = $service_id AND provider_id = $provider_id";
@@ -41,7 +40,7 @@ $updateQuery = "UPDATE services
 
 
     if (mysqli_query($conn, $updateQuery)) {
-        $message = "✅ تم تحديث الخدمة بنجاح!";
+        $message = " تم تحديث الخدمة بنجاح!";
     } else {
         $message = "❌ حدث خطأ أثناء التحديث.";
     }
@@ -130,11 +129,10 @@ button:hover { background:#777; }
 <script>
     const msg = document.querySelector('.message');
     if (msg) {
-        // بعد 5 ثواني: اختفاء الرسالة ثم إعادة التوجيه
         setTimeout(() => {
             msg.style.display = 'none';
             window.location.href = 'provider.php';
-        }, 3000);
+        }, 2000);
     }
 </script>
 
