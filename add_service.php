@@ -58,7 +58,7 @@ $sql = "INSERT INTO Services (provider_id, title, description, price, time, type
 
      
         if ($conn->query($sql) === TRUE) {
-            $message = "<div class='msg' style='color:green;'>✅ تمت إضافة الخدمة بنجاح! ...</div>";
+            $message = "<div class='msg' style='color:green;'>تمت إضافة الخدمة بنجاح </div>";
             echo "<script>setTimeout(()=>{ window.location.href='provider.php'; }, 2000);</script>";
         } else {
             $message = "<div class='msg' style='color:red;'>❌ خطأ: " . $conn->error . "</div>";
