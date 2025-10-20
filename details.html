@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>تفاصيل الخدمة | مِهَن</title>
+<style>
+body{
+  font-family:"Tajawal",sans-serif;
+  background:#f3f3f3;
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;   /* مهم: يخلي الهيدر/الفوتر بعرض كامل */
+}
+
+/* هيدر مثل services */
+header{
+  width:100%;
+  background:#f5f5f5;
+  padding:16px 20px;
+  border-bottom:1px solid #e8e8e8;
+  display:flex;
+  justify-content:flex-start; /* لو تبين الشعار يسار/يمين حسب RTL */
+}
+
+/* منطقة المحتوى */
+main{
+  flex:1;                  /* تملأ المساحة بين الهيدر والفوتر */
+  display:flex;
+  justify-content:center;  /* يوسّط الكارد أفقياً */
+  align-items:flex-start;  /* أعلى الصفحة */
+  padding:24px;
+}
+
+/* الكارد */
+.card{
+  background:#fff;
+  padding:25px;
+  border-radius:20px;
+  box-shadow:0 4px 12px rgba(0,0,0,.1);
+  max-width:420px;
+  width:100%;
+  text-align:center;
+}
+.card img{width:80px;height:80px;object-fit:contain}
+.card h2{color:#333;margin-top:10px}
+.card p{color:#555;line-height:1.6}
+
+/* زر */
+.btn{
+  display:inline-block;
+  margin-top:15px;
+  padding:10px 20px;
+  background:#007BFF;
+  color:#fff;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:bold
+}
+.btn:hover{background:#005dc6}
+
+/* فوتر متّسق ويثبت بأسفل الصفحة */
+footer{
+  width:100%;
+  text-align:center;
+  padding:18px;
+  background:#222;
+  color:#fff;
+  font-size:.9rem;
+  margin-top:auto;        /* يدفعه لأسفل */
+}
+footer a{color:#fff;text-decoration:none}
+footer .separator{margin:0 8px}
+
+</style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <a href="index.html" aria-label="الصفحة الرئيسية">
+        <img src="image/logo.jpg" alt="شعار مِهَن" class="logo" style="width:100px;">
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <div id="details" class="card"></div>
+  </main>
+
+  
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const id = Number(params.get('id'));
+
+let services = [];
+try { services = JSON.parse(localStorage.getItem('services') || '[]'); } catch(e){ services = []; }
+
+const s = services.find(x => Number(x.id) === id);
+const box = document.getElementById('details');
+
+if(!id || !s){
+  box.innerHTML = "<h3>لم يتم العثور على تفاصيل هذه الخدمة.</h3>";
+} else {
+  box.innerHTML = `
+    <img src="${s.icon}" alt="أيقونة الخدمة" style="width:80px;height:80px;object-fit:contain">
+    <h2>${s.title}</h2>
+    <p>${s.description}</p>
+    <p><strong>السعر:</strong> ${s.price} ر.س</p>
+  
+    <a href="orders.html?id=${s.id}" class="btn">طلب الخدمة</a>
+  `;
+}
+</script>
+
+
+<footer class="site-footer" role="contentinfo" aria-label="تذييل الموقع">
+    <div class="footer-inner">
+      <a href="mailto:contact@mihan.sa" class="footer-email">contact@mihn.sa</a>
+      <span class="separator">•</span>
+      <span>© 2025 مِهَن — جميع الحقوق محفوظة</span>
+    </div>
+</footer>
+</body>
+</html>
