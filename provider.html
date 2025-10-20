@@ -107,12 +107,7 @@ footer .separator { margin:0 10px; }
 </footer>
 
 <script>
-// خدمات افتراضية إذا لم تكن موجودة
-let services = JSON.parse(localStorage.getItem('services')) || [
-    { id:1, title:"تصميم مواقع إلكترونية", description:"نقدّم خدمة تصميم مواقع احترافية للشركات والأفراد مع دعم لجميع الأجهزة.", price:"500", time:"3 أيام" },
-    { id:2, title:"تصوير منتجات", description:"جلسة تصوير احترافية للمنتجات التجارية بخلفيات متعددة وإضاءة مثالية.", price:"300", time:"يوم واحد" },
-    { id:3, title:"إدارة حسابات التواصل الاجتماعي", description:"خدمة شاملة لإدارة المحتوى وجدولة المنشورات وزيادة التفاعل.", price:"800", time:"أسبوع" }
-];
+
 
 const container = document.getElementById('servicesContainer');
 const msgBox = document.getElementById('msg');
