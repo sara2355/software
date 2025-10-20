@@ -94,7 +94,7 @@ min-height: 100vh;}
 
 .brand {
   display: flex;
-  justify-content: center; 
+ /* justify-content: center;*/ 
   align-items: center;
 }
 
