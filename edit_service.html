@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>تعديل الخدمة</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="mihn_style.css">
+<style>
+body { font-family: Arial;  margin:0; padding:0; min-height:100vh;}
+main { padding:30px; display:flex; justify-content:center; flex-direction:column; align-items:center; flex:1;}
+form { background:#f0f0f0; padding:30px; border-radius:15px; box-shadow:0 4px 12px rgba(0,0,0,0.15); width:400px; display:flex; flex-direction:column; }
+label { display:block; margin:15px 0 5px; color:#333; font-weight:bold; }
+input, select { width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; box-sizing:border-box; }
+button { margin-top:20px; width:100%; padding:12px; background: var(--accent, #007BFF); color: var(--white, #fff); border:none; border-radius:8px; font-weight:bold; cursor:pointer; transition:0.3s; }
+button:hover { background:#777; }
+.message {
+    text-align:center;
+    font-weight:bold;
+    background:#d4edda;
+    color:#155724;
+    border:1px solid #c3e6cb;
+    padding:10px;
+    border-radius:8px;
+    margin-bottom:20px;
+}
+.error { background:#f8d7da; color:#721c24; border-color:#f5c6cb; }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="brand">
+    <a href="index.html" aria-label="الصفحة الرئيسية">
+      <img src="assets/logo.jpg" alt="شعار مِهَن" class="logo" style="width:100px;">
+    </a>
+  </div>
+</header>
+
+<main>
+<div class="message" id="msg" style="display:none;"></div>
+
+<form id="editServiceForm">
+    <label>اسم الخدمة:</label>
+    <input type="text" id="serviceName" required>
+
+    <label>الوصف:</label>
+    <input type="text" id="serviceDescription" required>
+
+    <label>السعر (ريال):</label>
+    <input type="number" id="servicePrice" required>
+
+    <label>الوقت المتوقع (بالساعات):</label>
+    <input type="text" id="serviceTime" required>
+
+    <label>نوع الخدمة:</label>
+    <select id="serviceType" required>
+        <option value="">اختر النوع</option>
+        <option value="صيانه المنازل">صيانه المنازل</option>
+        <option value="التنظيف">التنظيف</option>
+        <option value="خدمات السيارات">خدمات السيارات</option>
+        <option value="صيانه الاجهزه">صيانه الاجهزه</option>
+        <option value="التوصيل">التوصيل</option>
+        <option value="الخدمات الشخصيه">الخدمات الشخصيه</option>
+    </select>
+
+    <button type="submit">حفظ التعديلات</button>
+</form>
+</main>
+
+<footer class="site-footer" role="contentinfo" aria-label="تذييل الموقع">
+    <div class="footer-inner">
+      <a href="mailto:contact@mihan.sa" class="footer-email">contact@mihn.sa</a>
+      <span class="separator">•</span>
+      <span>© 2025 مِهَن — جميع الحقوق محفوظة</span>
+    </div>
+</footer>
+
+<script>
+// جلب الخدمة التي سيتم تعديلها من localStorage
+const urlParams = new URLSearchParams(window.location.search);
+const serviceId = Number(urlParams.get('id'));
+
+let services = JSON.parse(localStorage.getItem('services')) || [];
+let service = services.find(s => s.id === serviceId);
+
+if(!service){
+    alert("❌ الخدمة غير موجودة.");
+    window.location.href = "provider.html";
+}
+
+// تعبئة الحقول
+document.getElementById('serviceName').value = service.title;
+document.getElementById('serviceDescription').value = service.description;
+document.getElementById('servicePrice').value = service.price;
+document.getElementById('serviceTime').value = service.time;
+document.getElementById('serviceType').value = service.type;
+
+// معالجة التحديث
+document.getElementById('editServiceForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    service.title = document.getElementById('serviceName').value.trim();
+    service.description = document.getElementById('serviceDescription').value.trim();
+    service.price = document.getElementById('servicePrice').value.trim();
+    service.time = document.getElementById('serviceTime').value.trim();
+    service.type = document.getElementById('serviceType').value;
+
+    localStorage.setItem('services', JSON.stringify(services));
+
+    const msgBox = document.getElementById('msg');
+    msgBox.textContent = "✅ تم تحديث الخدمة بنجاح!";
+    msgBox.style.display = "block";
+
+    setTimeout(()=>{ window.location.href = "provider.html"; }, 2000);
+});
+</script>
+</body>
+</html>
