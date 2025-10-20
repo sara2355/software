@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>إنشاء حساب - مِهَن</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="mihn_style.css">
+</head>
+<body>
+    
+    <header class="site-header">
+  <div class="brand">
+    <a href="index.php" aria-label="الصفحة الرئيسية">
+      <img src="assets/logo.jpg" alt="شعار مِهَن" class="logo">
+    </a>
+  </div>
+</header>
+    
+  <div class="container">
+    <h2>إنشاء حساب جديد</h2>
+    <p class="desc">سجل حسابك للبدء كمستفيد أو مزوّد خدمة.</p>
+
+   
+
+    <form action="login.html" method="get" >
+      <label>الاسم الكامل</label>
+      <input type="text" name="full_name" required >
+
+      <label>البريد الإلكتروني</label>
+      <input type="email" name="email" required >
+
+      <label>رقم الجوال</label>
+      <input type="tel" name="phone" placeholder="مثال: 05XXXXXXXX" required >
+
+      <label>كلمة المرور</label>
+<div class="password-container">
+  <input type="password" id="password" name="password" minlength="6" required>
+  <span id="togglePassword" class="toggle-icon">🔒</span>
+</div>
+      <label>نوع المستخدم</label>
+      <div class="radio-group">
+        <label><input type="radio" name="user_type" value="provider" required> مزود خدمة</label>
+        <label><input type="radio" name="user_type" value="recipient" required> مستفيد</label>
+      </div>
+
+      <button type="submit">إنشاء الحساب</button>
+    </form>
+
+    <p class="center small" style="margin-top:14px;">
+      لديك حساب؟ <a href="login.html">سجّل الدخول من هنا</a>
+    </p>
+  </div>
+    
+    <footer class="site-footer" role="contentinfo" aria-label="تذييل الموقع">
+    <div class="footer-inner">
+      <a href="mailto:contact@mihan.sa" class="footer-email">contact@mihn.sa</a>
+      <span class="separator">•</span>
+      <span>© 2025 مِهَن — جميع الحقوق محفوظة</span>
+    </div>
+  </footer>
+    
+    <script>
+
+
+const toggle = document.getElementById('togglePassword');
+const password = document.getElementById('password');
+
+toggle.addEventListener('click', () => {
+  const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+  password.setAttribute('type', type);
+  toggle.textContent = type === 'password' ? '🔒' : '🔓';
+});
+</script>
+
+</body>
+</html>
