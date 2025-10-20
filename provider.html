@@ -112,6 +112,8 @@ footer .separator { margin:0 10px; }
 const container = document.getElementById('servicesContainer');
 const msgBox = document.getElementById('msg');
 
+let services = JSON.parse(localStorage.getItem('services')) || [];
+
 // عرض الخدمات
 function displayServices() {
     container.innerHTML = "";
