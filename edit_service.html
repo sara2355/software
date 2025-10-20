@@ -8,7 +8,7 @@
 <style>
 body { font-family: Arial;  margin:0; padding:0; min-height:100vh;}
 main { padding:30px; display:flex; justify-content:center; flex-direction:column; align-items:center; flex:1;}
-form { background:#f0f0f0; padding:30px; border-radius:15px; box-shadow:0 4px 12px rgba(0,0,0,0.15); width:400px; display:flex; flex-direction:column; }
+form { background:#f0f0f0; padding:30px; border-radius:15px; box-shadow:0 4px 12px rgba(0,0,0,0.15); width:600px; display:flex; flex-direction:column; }
 label { display:block; margin:15px 0 5px; color:#333; font-weight:bold; }
 input, select { width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; box-sizing:border-box; }
 button { margin-top:20px; width:100%; padding:12px; background: var(--accent, #007BFF); color: var(--white, #fff); border:none; border-radius:8px; font-weight:bold; cursor:pointer; transition:0.3s; }
@@ -24,6 +24,10 @@ button:hover { background:#777; }
     margin-bottom:20px;
 }
 .error { background:#f8d7da; color:#721c24; border-color:#f5c6cb; }
+ h2 {
+        text-align:center;
+        font-size:24px;
+    }
 </style>
 </head>
 <body>
@@ -39,6 +43,8 @@ button:hover { background:#777; }
 <div class="message" id="msg" style="display:none;"></div>
 
 <form id="editServiceForm">
+         <h2>️ تحديث الخدمة</h2>
+
     <label>اسم الخدمة:</label>
     <input type="text" id="serviceName" required>
 
