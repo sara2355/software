@@ -1,10 +1,10 @@
-/* mihan_style.css */
+/* mihn_style.css */
 :root{
-  --primary:#2E2E2E;      /* رمادي غامق للنصوص */
-  --secondary:#6E6E6E;    /* رمادي معدني للحواف */
-  --background:#EAE8E4;   /* خلفية عامة */
-  --accent:#5A8DA8;       /* زر/روابط تفاعلية */
-  --white:#FFFFFF;        /* أبيض للكروت */
+  --primary:#2E2E2E;      
+  --secondary:#6E6E6E;    
+  --background:#EAE8E4;   
+  --accent:#5A8DA8;       
+  --white:#FFFFFF;        
 }
 
 *{box-sizing:border-box}
@@ -94,7 +94,7 @@ min-height: 100vh;}
 
 .brand {
   display: flex;
-  justify-content: center; /* اللوقو بالوسط */
+  justify-content: center; 
   align-items: center;
 }
 
