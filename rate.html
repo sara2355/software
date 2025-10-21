@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>مِهَن | تقييم الخدمة</title>
+
+<style>
+:root{
+  --bg:#e0e0e0;
+  --card:#fff;
+  --text:#333;
+  --muted:#555;
+  --accent:#007BFF;
+  --accent-hover:#005dc6;
+  --success:#28a745;
+  --success-hover:#1e7e34;
+  --dark:#222;
+  --radius:20px;
+  --shadow:0 4px 12px rgba(0,0,0,.08);
+  --shadow-lg:0 8px 20px rgba(0,0,0,.15);
+}
+
+*{box-sizing:border-box}
+body{
+  font-family: "Tajawal", Arial, sans-serif; 
+  background:var(--bg); 
+  margin:0; 
+  min-height:100vh; 
+  display:flex; 
+  flex-direction:column;
+}
+
+/* unified header/footer */
+header.site-header{
+  background:#f5f5f5;
+  padding:16px 20px;
+  border-bottom:1px solid #e8e8e8;
+}
+header.site-header .brand{
+  font-weight:800;
+  color:#444;
+}
+header.site-header img.logo{
+  width:100px;
+}
+footer.site-footer{
+  text-align:center;
+  padding:18px;
+  background:var(--dark);
+  color:#fff;
+  font-size:.9rem;
+}
+footer.site-footer a{color:#fff; text-decoration:none;}
+footer.site-footer .separator{margin:0 8px;}
+
+main{padding:24px; flex:1; display:flex; justify-content:center; align-items:center;}
+
+.rate-container{
+  background:var(--card); 
+  padding:40px; 
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-lg);
+  max-width:550px;
+  width:100%;
+}
+
+h1{text-align:center; color:var(--text); margin-bottom:10px; font-size:1.8rem;}
+.subtitle{text-align:center; color:var(--muted); margin-bottom:30px; font-size:1rem;}
+
+.service-info{
+  background:#f8f9fa;
+  padding:16px;
+  border-radius:12px;
+  margin-bottom:24px;
+}
+.service-info p{margin:6px 0; color:var(--text); font-size:0.95rem;}
+.service-info p strong{color:var(--dark);}
+
+.rating-section{margin-bottom:24px;}
+.rating-section label{
+  display:block;
+  margin-bottom:10px;
+  font-weight:700;
+  color:var(--text);
+  font-size:1.05rem;
+}
+
+.stars{
+  display:flex;
+  gap:8px;
+  font-size:2.5rem;
+  justify-content:center;
+  margin-bottom:6px;
+}
+.star{
+  cursor:pointer;
+  color:#ddd;
+  transition:color 0.2s, transform 0.2s;
+}
+.star.selected,
+.star:hover{
+  color:#ffc107;
+  transform:scale(1.1);
+}
+
+.comment-section{margin-bottom:24px;}
+.comment-section label{
+  display:block;
+  margin-bottom:8px;
+  font-weight:700;
+  color:var(--text);
+  font-size:1.05rem;
+}
+.comment-section textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid #ccc;
+  border-radius:10px;
+  font-size:1rem;
+  font-family:inherit;
+  resize:vertical;
+  min-height:120px;
+}
+
+.actions{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+}
+
+.btn{
+  padding:12px 24px; 
+  border:none; 
+  border-radius:10px; 
+  cursor:pointer; 
+  font-weight:700; 
+  font-size:1rem;
+  text-decoration:none;
+  display:inline-block;
+  text-align:center;
+}
+.btn-submit{background:var(--success); color:#fff;}
+.btn-submit:hover{background:var(--success-hover);}
+.btn-cancel{background:#6c757d; color:#fff;}
+.btn-cancel:hover{background:#5a6268;}
+
+.message{
+  padding:12px 20px; 
+  border-radius:10px; 
+  margin-bottom:20px; 
+  text-align:center; 
+  font-weight:600;
+}
+.message.success{background:#d4edda; color:#155724;}
+.message.error{background:#f8d7da; color:#721c24;}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="brand">
+    <a href="services.html" aria-label="العودة للخدمات">
+      <img src="image/logo.jpg" alt="شعار مِهَن" class="logo">
+    </a>
+  </div>
+</header>
+
+<main>
+  <div class="rate-container">
+    <h1>تقييم الخدمة</h1>
+    <p class="subtitle">نسعد بمعرفة رأيك في الخدمة المقدمة</p>
+
+    <div id="messageBox" class="message" style="display:none;"></div>
+
+    <div class="service-info" id="serviceInfo"></div>
+
+    <div class="rating-section">
+      <label>التقييم بالنجوم:</label>
+      <div class="stars" id="starsContainer">
+        <span class="star" data-value="1">★</span>
+        <span class="star" data-value="2">★</span>
+        <span class="star" data-value="3">★</span>
+        <span class="star" data-value="4">★</span>
+        <span class="star" data-value="5">★</span>
+      </div>
+    </div>
+
+    <div class="comment-section">
+      <label for="comment">تعليقك (اختياري):</label>
+      <textarea id="comment" placeholder="شاركنا تجربتك مع هذه الخدمة..."></textarea>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-submit" onclick="submitRating()">إرسال التقييم</button>
+      <a class="btn btn-cancel" href="requests.html">إلغاء</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer" role="contentinfo" aria-label="تذييل الموقع">
+  <div class="footer-inner">
+    <a href="mailto:contact@mihn.sa" class="footer-email">contact@mihn.sa</a>
+    <span class="separator">•</span>
+    <span>© 2025 مِهَن — جميع الحقوق محفوظة</span>
+  </div>
+</footer>
+
+<script>
+const services = [
+  {id:1, title:"صيانة المنازل", provider:"فريق الصيانة السريعة", price:120},
+  {id:2, title:"التنظيف", provider:"مؤسسة النظافة المثالية", price:90},
+  {id:3, title:"خدمات السيارات", provider:"CarCare Express", price:70},
+  {id:4, title:"صيانة الأجهزة", provider:"FixIt Tech", price:60},
+  {id:5, title:"التوصيل والمشاوير", provider:"مرسال المدينة", price:25},
+  {id:6, title:"المناسبات والضيافة", provider:"Event Touch", price:150},
+];
+
+const urlParams = new URLSearchParams(window.location.search);
+const reqId = parseInt(urlParams.get('reqId'));
+let requests = JSON.parse(localStorage.getItem('requests') || '[]');
+const request = requests.find(r => r.reqId === reqId);
+let selectedRating = 0;
+
+if(request){
+  const service = services.find(s => s.id === request.serviceId);
+  if(service){
+    document.getElementById('serviceInfo').innerHTML = `
+      <p><strong>الخدمة:</strong> ${service.title}</p>
+      <p><strong>مقدم الخدمة:</strong> ${service.provider}</p>
+      <p><strong>التاريخ:</strong> ${request.date}</p>
+      <p><strong>الوقت:</strong> ${request.time}</p>
+    `;
+  }
+} else {
+  document.getElementById('serviceInfo').innerHTML = '<p>لم يتم العثور على الطلب.</p>';
+}
+
+const stars = document.querySelectorAll('.star');
+stars.forEach(star=>{
+  star.addEventListener('click', function(){
+    selectedRating = parseInt(this.getAttribute('data-value'));
+    updateStars();
+  });
+});
+function updateStars(){
+  stars.forEach((star, index)=>{
+    if(index < selectedRating){
+      star.classList.add('selected');
+    } else {
+      star.classList.remove('selected');
+    }
+  });
+}
+
+function submitRating(){
+  const msgBox = document.getElementById('messageBox');
+  if(selectedRating === 0){
+    msgBox.textContent = 'يرجى تحديد تقييم بالنجوم.';
+    msgBox.className = 'message error';
+    msgBox.style.display = 'block';
+    return;
+  }
+  const comment = document.getElementById('comment').value.trim();
+  const requestIndex = requests.findIndex(r => r.reqId === reqId);
+  if(requestIndex !== -1){
+    requests[requestIndex].status = 'completed';
+    localStorage.setItem('requests', JSON.stringify(requests));
+  }
+  let ratings = JSON.parse(localStorage.getItem('ratings') || '[]');
+  ratings.push({
+    reqId: reqId,
+    serviceId: request.serviceId,
+    rating: selectedRating,
+    comment: comment,
+    date: new Date().toISOString()
+  });
+  localStorage.setItem('ratings', JSON.stringify(ratings));
+  msgBox.textContent = 'شكرًا لك! تم إرسال تقييمك بنجاح.';
+  msgBox.className = 'message success';
+  msgBox.style.display = 'block';
+  setTimeout(()=>{ window.location.href = 'requests.html'; }, 2000);
+}
+</script>
+
+</body>
+</html>
