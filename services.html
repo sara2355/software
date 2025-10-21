@@ -1,4 +1,4 @@
-<!doctype html>
+!doctype html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8" />
@@ -228,7 +228,9 @@
 
 <div style="display:flex; gap:10px; align-items:center;">
   <a class="cart-btn orders" href="requests.html">📄 قائمة الطلبات</a>
-<button id="addToCartBtn" class="btn">طلب الخدمة</button></div>
+  <a class="cart-btn" href="cart.html" id="cartBtn">🛒 السلة <span class="badge" id="cartCount">0</span></a>
+  
+</div>
 
 
   </div>
@@ -353,33 +355,6 @@ render();
 
 // نحفظ الخدمات للـ details.html (يقرأها من localStorage)
 localStorage.setItem('services', JSON.stringify(services));
-// عند الضغط على زر طلب الخدمة، نضيفها للسلة
-document.getElementById('addToCartBtn').addEventListener('click', () => {
-  // نحاول نقرأ السلة القديمة
-  const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-
-  // نتحقق إذا كانت الخدمة موجودة مسبقاً (حسب id)
-  const exists = cart.find(item => item.id === s.id);
-
-  if (!exists) {
-    cart.push({
-      id: s.id,
-      title: s.title,
-      price: s.price,
-      time: s.time,
-      emoji: s.emoji || '🧰',
-      description: s.description,
-      qty: 1
-    });
-    localStorage.setItem('cart', JSON.stringify(cart));
-    alert('✅ تمت إضافة الخدمة إلى السلة بنجاح!');
-  } else {
-    alert('🛒 الخدمة موجودة مسبقاً في السلة.');
-  }
-
-  // تحويل المستخدم مباشرة إلى صفحة السلة
-  window.location.href = 'cart.html';
-});
 
 
 </script>
