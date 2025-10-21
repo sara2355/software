@@ -131,6 +131,13 @@ const listEl  = document.getElementById('cartItems');
 const totalEl = document.getElementById('totalPrice');
 const payBox  = document.getElementById('payMethods');
 const btnPay  = document.getElementById('checkoutBtn');
+function toTimeValue(t){
+  if(!t) return '00:00';
+  const parts = t.toString().split(':');
+  const hh = (parts[0] || '00').padStart(2,'0');
+  const mm = (parts[1] || '00').padStart(2,'0');
+  return `${hh}:${mm}`;
+}
 
 // رسم المحتوى
 function renderCart(){
@@ -168,10 +175,11 @@ function renderCart(){
       </div>
 
       <div class="item-actions">
-        <div class="qty-box">
-          <label>الكمية:</label>
-          <input class="qty-input" type="number" min="1" value="${it.qty || 1}" data-idx="${idx}">
-        </div>
+        <label style="display:flex;align-items:center;gap:8px">
+  <span>الوقت:</span>
+  <input class="time-input" type="time" value="${toTimeValue(it.time)}" data-idx="${idx}">
+</label>
+
         <button class="btn btn-blue" data-action="save" data-idx="${idx}">حفظ التعديل</button>
         <button class="btn btn-red"  data-action="del"  data-idx="${idx}">حذف</button>
       </div>
@@ -199,15 +207,15 @@ listEl.addEventListener('click', (e)=>{
     return;
   }
 
-  if(btn.getAttribute('data-action') === 'save'){
-    const input = listEl.querySelector(`.qty-input[data-idx="${idx}"]`);
-    let q = Number(input.value);
-    if(isNaN(q) || q < 1) q = 1;
-    cart[idx].qty = q;
-    setCart(cart);
-    renderCart();
-    return;
-  }
+if(btn.getAttribute('data-action') === 'save'){
+  const input = listEl.querySelector(`.time-input[data-idx="${idx}"]`);
+  let t = (input && input.value) ? input.value : '00:00';
+  cart[idx].time = t;
+  setCart(cart);
+  renderCart();
+  return;
+}
+
 });
 
 // الدفع → إنشاء طلب ثم تحويل مباشر
