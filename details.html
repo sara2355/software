@@ -4,124 +4,184 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>تفاصيل الخدمة | مِهَن</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
+:root{
+  --bg:#e9e6e2;
+  --card:#fff;
+  --text:#2d2d2d;
+  --muted:#555;
+  --chip:#E6D5B8;
+  --accent:#5A8DA8;
+  --accent-hover:#4F7E97;
+  --border:#8B4513;
+  --radius:20px;
+  --shadow:0 4px 12px rgba(0,0,0,.08);
+}
+*{box-sizing:border-box}
 body{
-  font-family:"Tajawal",sans-serif;
-  background:#f3f3f3;
-  margin:0;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:stretch;   /* مهم: يخلي الهيدر/الفوتر بعرض كامل */
-}
+  font-family:"Tajawal",sans-serif;background:var(--bg);margin:0;min-height:100vh;
+  display:flex;flex-direction:column;align-items:stretch;color:var(--text);
+.site-header {
+    background: #d8d5d0;
+    border-bottom: 2px solid #b9b6b2;
+    padding: 15px 20px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    position: relative; /* حتى نقدر نثبت زر الخروج */
+  }
 
-/* هيدر مثل services */
-header{
-  width:100%;
-  background:#f5f5f5;
-  padding:16px 20px;
-  border-bottom:1px solid #e8e8e8;
-  display:flex;
-  justify-content:flex-start; /* لو تبين الشعار يسار/يمين حسب RTL */
-}
+  .logo {
+    width: 120px;
+  }
 
-/* منطقة المحتوى */
-main{
-  flex:1;                  /* تملأ المساحة بين الهيدر والفوتر */
-  display:flex;
-  justify-content:center;  /* يوسّط الكارد أفقياً */
-  align-items:flex-start;  /* أعلى الصفحة */
-  padding:24px;
-}
+   .logout-btn {
+    position: absolute;
+    right: 20px; /* أقصى اليمين */
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .logout-btn img {
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
 
-/* الكارد */
+  .logout-btn img:hover {
+    transform: scale(1.1);
+  }
+  
+  
+/* Main */
+main{flex:1;display:flex;justify-content:center;align-items:flex-start;padding:24px}
 .card{
-  background:#fff;
-  padding:25px;
-  border-radius:20px;
-  box-shadow:0 4px 12px rgba(0,0,0,.1);
-  max-width:420px;
-  width:100%;
-  text-align:center;
+  background:var(--card);border:2px solid var(--border);border-radius:var(--radius);
+  box-shadow:var(--shadow);max-width:600px;width:100%;padding:24px;text-align:center
 }
-.card img{width:80px;height:80px;object-fit:contain}
-.card h2{color:#333;margin-top:10px}
-.card p{color:#555;line-height:1.6}
-
-/* زر */
+.card h2{margin:10px 0 12px;font-size:1.8rem}
+.desc{color:var(--muted);line-height:1.8;margin:0 0 16px}
+.info{
+  display:flex;justify-content:space-between;gap:10px;background:var(--chip);
+  border-radius:12px;padding:10px 14px;font-weight:800;margin:0 0 14px
+}
+.row{display:flex;justify-content:space-between;align-items:center;margin:8px 0}
+.rating{display:flex;justify-content:center;align-items:center;gap:8px;margin:6px 0 2px}
+.stars{font-size:20px;letter-spacing:2px}
+.muted{color:var(--muted);font-size:.95rem}
+.reviews{list-style:none;margin:14px 0 0;padding:0;text-align:right}
+.reviews li{background:#faf8f5;border:1px solid #e8e2da;border-radius:12px;padding:10px 12px;margin-bottom:10px}
+.reviews strong{margin-left:6px}
 .btn{
-  display:inline-block;
-  margin-top:15px;
-  padding:10px 20px;
-  background:#007BFF;
-  color:#fff;
-  border-radius:10px;
-  text-decoration:none;
-  font-weight:bold
+  display:inline-block;margin-top:16px;padding:12px 18px;border:none;border-radius:10px;
+  background:var(--accent);color:#fff;text-decoration:none;font-weight:800;cursor:pointer
 }
-.btn:hover{background:#005dc6}
-
-/* فوتر متّسق ويثبت بأسفل الصفحة */
-footer{
-  width:100%;
-  text-align:center;
-  padding:18px;
-  background:#222;
-  color:#fff;
-  font-size:.9rem;
-  margin-top:auto;        /* يدفعه لأسفل */
-}
-footer a{color:#fff;text-decoration:none}
-footer .separator{margin:0 8px}
-
+.btn:hover{background:var(--accent-hover)}
+/* Footer */
+.site-footer{background:#d8d5d0;border-top:2px solid #b9b6b2;padding:15px;text-align:center;color:#4b4b4b;font-size:15px;box-shadow:0 -2px 6px rgba(0,0,0,0.05)}
+.footer-email{color:#3e3e3e;text-decoration:none;font-weight:bold}
+.separator{margin:0 8px;color:#999}
 </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="brand">
-      <a href="index.html" aria-label="الصفحة الرئيسية">
-        <img src="image/logo.jpg" alt="شعار مِهَن" class="logo" style="width:100px;">
-      </a>
-    </div>
-  </header>
+<header class="site-header">
+  <!-- شعار الموقع -->
+    <img src="image/logo.jpg" alt="شعار مِهَن" class="logo">
 
-  <main>
-    <div id="details" class="card"></div>
-  </main>
+  <!-- زر الخروج -->
+  <a href="index.html" aria-label="تسجيل الخروج" class="logout-btn">
+    <img src="image/logout.png" alt="خروج">
+  </a>
+</header>
 
-  
+
+<main>
+  <article id="details" class="card"></article>
+</main>
+
+<footer class="site-footer">
+  <a href="mailto:contact@mihan.sa" class="footer-email">contact@mihan.sa</a>
+  <span class="separator">•</span>
+  <span>© 2025 مِهَن — جميع الحقوق محفوظة</span>
+</footer>
 
 <script>
 const params = new URLSearchParams(window.location.search);
 const id = Number(params.get('id'));
 
+// جلب قائمة الخدمات المحفوظة من services.html
 let services = [];
 try { services = JSON.parse(localStorage.getItem('services') || '[]'); } catch(e){ services = []; }
 
-const s = services.find(x => Number(x.id) === id);
+const service = services.find(x => Number(x.id) === id);
 const box = document.getElementById('details');
 
-if(!id || !s){
+// تقييمات + تعليقات مبدئية (عدّليها كما تحبين)
+const seed = {
+  2: { rating: 4.6, reviews: [
+        {name:'سارة', text:'خدمة ممتازة وسريعة 👌'},
+        {name:'محمد', text:'الفني محترف والتعامل راقٍ.'},
+      ]},
+  3: { rating: 4.3, reviews: [
+        {name:'مجد', text:'حلّ المشكلة بسرعة. شكراً!'},
+      ]},
+  5: { rating: 4.2, reviews: [
+        {name:'نورة', text:'نظيفين وشغلهم مرتب قبل المناسبة.'},
+      ]},
+  7: { rating: 4.1, reviews: [
+        {name:'أبو فيصل', text:'سعر مناسب وجودة جيدة.'},
+      ]},
+};
+
+// تحويل HH:MM:SS -> HH:MM إن وُجدت
+function fmtTime(t){
+  if(!t) return '-';
+  const parts = t.toString().split(':');
+  return parts.length >= 2 ? `${parts[0]}:${parts[1]}` : t;
+}
+
+function starsHTML(val){
+  if(!val) return '<span class="muted">لا يوجد تقييم بعد</span>';
+  const full = Math.floor(val);
+  const half = (val - full) >= 0.5 ? 1 : 0;
+  const empty = 5 - full - half;
+  return `<span class="stars">${
+    '★'.repeat(full) + (half ? '½' : '') + '☆'.repeat(empty)
+  }</span> <strong>${val.toFixed(1)}</strong>`;
+}
+
+if(!id || !service){
   box.innerHTML = "<h3>لم يتم العثور على تفاصيل هذه الخدمة.</h3>";
 } else {
+  // دمج بيانات التقييم/التعليقات الافتراضية إذا موجودة
+  const extra = seed[service.id] || {};
+  const rating = extra.rating || null;
+  const reviews = extra.reviews || [];
+
   box.innerHTML = `
-    <img src="${s.icon}" alt="أيقونة الخدمة" style="width:80px;height:80px;object-fit:contain">
-    <h2>${s.title}</h2>
-    <p>${s.description}</p>
-    <p><strong>السعر:</strong> ${s.price} ر.س</p>
-  
-    <a href="orders.html?id=${s.id}" class="btn">طلب الخدمة</a>
+    <h2>${service.title}</h2>
+    <p class="desc">${service.desc || '-'}</p>
+
+    <div class="info">
+      <span>⏱️ ${fmtTime(service.time)}</span>
+      <span>💰 ${service.price} ر.س</span>
+    </div>
+
+    <div class="rating">
+      ${starsHTML(rating)}
+    </div>
+
+    <p class="muted" style="margin-top:6px">التعليقات</p>
+    <ul class="reviews">
+      ${reviews.length
+        ? reviews.map(r=>`<li><strong>${r.name}</strong> ${r.text}</li>`).join('')
+        : '<li class="muted" style="text-align:center">لا توجد تعليقات بعد</li>'}
+    </ul>
+
+    <a href="orders.html?id=${service.id}" class="btn">طلب الخدمة</a>
   `;
 }
 </script>
-
-
-<footer class="site-footer" role="contentinfo" aria-label="تذييل الموقع">
-    <div class="footer-inner">
-      <a href="mailto:contact@mihan.sa" class="footer-email">contact@mihn.sa</a>
-      <span class="separator">•</span>
-      <span>© 2025 مِهَن — جميع الحقوق محفوظة</span>
-    </div>
-</footer>
 </body>
 </html>
