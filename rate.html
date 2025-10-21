@@ -4,6 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>مِهَن | تقييم الخدمة</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
@@ -31,28 +32,13 @@ body{
   flex-direction:column;
 }
 
-/* unified header/footer */
-header.site-header{
-  background:#f5f5f5;
-  padding:16px 20px;
-  border-bottom:1px solid #e8e8e8;
-}
-header.site-header .brand{
-  font-weight:800;
-  color:#444;
-}
-header.site-header img.logo{
-  width:100px;
-}
-footer.site-footer{
-  text-align:center;
-  padding:18px;
-  background:var(--dark);
-  color:#fff;
-  font-size:.9rem;
-}
-footer.site-footer a{color:#fff; text-decoration:none;}
-footer.site-footer .separator{margin:0 8px;}
+.site-header {
+    background: #d8d5d0;
+    border-bottom: 2px solid #b9b6b2;
+    padding: 15px 20px;
+    text-align: center;
+  }
+  .logo { width: 120px; }
 
 main{padding:24px; flex:1; display:flex; justify-content:center; align-items:center;}
 
@@ -139,6 +125,7 @@ h1{text-align:center; color:var(--text); margin-bottom:10px; font-size:1.8rem;}
   text-decoration:none;
   display:inline-block;
   text-align:center;
+  transition: all 0.3s ease;
 }
 .btn-submit{background:var(--success); color:#fff;}
 .btn-submit:hover{background:var(--success-hover);}
@@ -154,13 +141,24 @@ h1{text-align:center; color:var(--text); margin-bottom:10px; font-size:1.8rem;}
 }
 .message.success{background:#d4edda; color:#155724;}
 .message.error{background:#f8d7da; color:#721c24;}
+
+.site-footer {
+    background: #d8d5d0;
+    border-top: 2px solid #b9b6b2;
+    padding: 15px;
+    text-align: center;
+    color: #4b4b4b;
+    font-size: 15px;
+  }
+  .footer-email { color: #3e3e3e; text-decoration: none; font-weight: bold; }
+  .separator { margin: 0 8px; color: #999; }
 </style>
 </head>
 <body>
 
 <header class="site-header">
-  <div class="brand">
-    <a href="services.html" aria-label="العودة للخدمات">
+  <div >
+    <a href="requests.html">
       <img src="image/logo.jpg" alt="شعار مِهَن" class="logo">
     </a>
   </div>
@@ -173,7 +171,9 @@ h1{text-align:center; color:var(--text); margin-bottom:10px; font-size:1.8rem;}
 
     <div id="messageBox" class="message" style="display:none;"></div>
 
-    <div class="service-info" id="serviceInfo"></div>
+    <div class="service-info" id="serviceInfo">
+      <p>جاري تحميل معلومات الطلب...</p>
+    </div>
 
     <div class="rating-section">
       <label>التقييم بالنجوم:</label>
@@ -198,53 +198,51 @@ h1{text-align:center; color:var(--text); margin-bottom:10px; font-size:1.8rem;}
   </div>
 </main>
 
-<footer class="site-footer" role="contentinfo" aria-label="تذييل الموقع">
-  <div class="footer-inner">
-    <a href="mailto:contact@mihn.sa" class="footer-email">contact@mihn.sa</a>
-    <span class="separator">•</span>
-    <span>© 2025 مِهَن — جميع الحقوق محفوظة</span>
-  </div>
+<footer class="site-footer">
+  <a href="mailto:contact@mihan.sa" class="footer-email">contact@mihan.sa</a>
+  <span class="separator">•</span>
+  <span>© 2025 مِهَن — جميع الحقوق محفوظة</span>
 </footer>
 
 <script>
-const services = [
-  {id:1, title:"صيانة المنازل", provider:"فريق الصيانة السريعة", price:120},
-  {id:2, title:"التنظيف", provider:"مؤسسة النظافة المثالية", price:90},
-  {id:3, title:"خدمات السيارات", provider:"CarCare Express", price:70},
-  {id:4, title:"صيانة الأجهزة", provider:"FixIt Tech", price:60},
-  {id:5, title:"التوصيل والمشاوير", provider:"مرسال المدينة", price:25},
-  {id:6, title:"المناسبات والضيافة", provider:"Event Touch", price:150},
-];
-
+// Get request ID from URL
 const urlParams = new URLSearchParams(window.location.search);
 const reqId = parseInt(urlParams.get('reqId'));
+
+console.log('Request ID from URL:', reqId);
+
+// Get requests from localStorage
 let requests = JSON.parse(localStorage.getItem('requests') || '[]');
+console.log('All requests:', requests);
+
 const request = requests.find(r => r.reqId === reqId);
+console.log('Found request:', request);
+
 let selectedRating = 0;
 
+// Display service information
 if(request){
-  const service = services.find(s => s.id === request.serviceId);
-  if(service){
-    document.getElementById('serviceInfo').innerHTML = `
-      <p><strong>الخدمة:</strong> ${service.title}</p>
-      <p><strong>مقدم الخدمة:</strong> ${service.provider}</p>
-      <p><strong>التاريخ:</strong> ${request.date}</p>
-      <p><strong>الوقت:</strong> ${request.time}</p>
-    `;
-  }
+  document.getElementById('serviceInfo').innerHTML = `
+    <p><strong>الخدمة:</strong> ${request.title}</p>
+    <p><strong>مقدم الخدمة:</strong> ${request.provider}</p>
+    <p><strong>التاريخ:</strong> ${request.date}</p>
+    <p><strong>الوقت:</strong> ${request.time}</p>
+  `;
 } else {
-  document.getElementById('serviceInfo').innerHTML = '<p>لم يتم العثور على الطلب.</p>';
+  document.getElementById('serviceInfo').innerHTML = '<p style="color: #d9534f;">لم يتم العثور على الطلب. يرجى العودة وإعادة المحاولة.</p>';
 }
 
+// Star rating functionality
 const stars = document.querySelectorAll('.star');
-stars.forEach(star=>{
+stars.forEach(star => {
   star.addEventListener('click', function(){
     selectedRating = parseInt(this.getAttribute('data-value'));
     updateStars();
   });
 });
+
 function updateStars(){
-  stars.forEach((star, index)=>{
+  stars.forEach((star, index) => {
     if(index < selectedRating){
       star.classList.add('selected');
     } else {
@@ -253,20 +251,37 @@ function updateStars(){
   });
 }
 
+// Submit rating
 function submitRating(){
   const msgBox = document.getElementById('messageBox');
+  
+  // Validate star rating
   if(selectedRating === 0){
     msgBox.textContent = 'يرجى تحديد تقييم بالنجوم.';
     msgBox.className = 'message error';
     msgBox.style.display = 'block';
     return;
   }
+
+  // Check if request exists
+  if(!request){
+    msgBox.textContent = 'خطأ: لم يتم العثور على الطلب.';
+    msgBox.className = 'message error';
+    msgBox.style.display = 'block';
+    return;
+  }
+
   const comment = document.getElementById('comment').value.trim();
+
+  // Update request status to "completed"
   const requestIndex = requests.findIndex(r => r.reqId === reqId);
   if(requestIndex !== -1){
     requests[requestIndex].status = 'completed';
     localStorage.setItem('requests', JSON.stringify(requests));
+    console.log('Updated request status to completed');
   }
+
+  // Save rating
   let ratings = JSON.parse(localStorage.getItem('ratings') || '[]');
   ratings.push({
     reqId: reqId,
@@ -276,10 +291,18 @@ function submitRating(){
     date: new Date().toISOString()
   });
   localStorage.setItem('ratings', JSON.stringify(ratings));
+  console.log('Rating saved');
+
+  // Show success message
   msgBox.textContent = 'شكرًا لك! تم إرسال تقييمك بنجاح.';
   msgBox.className = 'message success';
   msgBox.style.display = 'block';
-  setTimeout(()=>{ window.location.href = 'requests.html'; }, 2000);
+
+  // Redirect back to requests page
+  setTimeout(() => {
+    console.log('Redirecting to requests.html');
+    window.location.href = 'requests.html';
+  }, 2000);
 }
 </script>
 
