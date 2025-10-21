@@ -22,7 +22,7 @@
 *{box-sizing:border-box}
 body{
   font-family:"Tajawal",sans-serif;background:var(--bg);margin:0;min-height:100vh;
-  display:flex;flex-direction:column;align-items:stretch;color:var(--text);
+  display:flex;flex-direction:column;align-items:stretch;color:var(--text);}
 .site-header {
     background: #d8d5d0;
     border-bottom: 2px solid #b9b6b2;
@@ -151,68 +151,68 @@ function starsHTML(val){
   }</span> <strong>${val.toFixed(1)}</strong>`;
 }
 
-if(!id || !service){
-  box.innerHTML = "<h3>لم يتم العثور على تفاصيل هذه الخدمة.</h3>";
-} else {
-  // دمج بيانات التقييم/التعليقات الافتراضية إذا موجودة
-  const extra = seed[service.id] || {};
-  const rating = extra.rating || null;
-  const reviews = extra.reviews || [];
 
-  box.innerHTML = `
-    <h2>${service.title}</h2>
-    <p class="desc">${service.desc || '-'}</p>
-
-    <div class="info">
-      <span>⏱️ ${fmtTime(service.time)}</span>
-      <span>💰 ${service.price} ر.س</span>
-    </div>
-
-    <div class="rating">
-      ${starsHTML(rating)}
-    </div>
-
-    <p class="muted" style="margin-top:6px">التعليقات</p>
-    <ul class="reviews">
-      ${reviews.length
-        ? reviews.map(r=>`<li><strong>${r.name}</strong> ${r.text}</li>`).join('')
-        : '<li class="muted" style="text-align:center">لا توجد تعليقات بعد</li>'}
-    </ul>
-
-   <button id="addToCartBtn" class="btn">طلب الخدمة</button>
-
-  `;
-
-
-  // عند الضغط على زر طلب الخدمة، نضيفها للسلة
-document.getElementById('addToCartBtn').addEventListener('click', () => {
-  // نحاول نقرأ السلة القديمة
-  const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-
-  // نتحقق إذا كانت الخدمة موجودة مسبقاً (حسب id)
-  const exists = cart.find(item => item.id === s.id);
-
-  if (!exists) {
-    cart.push({
-      id: s.id,
-      title: s.title,
-      price: s.price,
-      time: s.time,
-      emoji: s.emoji || '🧰',
-      description: s.description,
-      qty: 1
-    });
-    localStorage.setItem('cart', JSON.stringify(cart));
-    alert('✅ تمت إضافة الخدمة إلى السلة بنجاح!');
+ 
+  if(!id || !service){
+    box.innerHTML = "<h3>لم يتم العثور على تفاصيل هذه الخدمة.</h3>";
   } else {
-    alert('🛒 الخدمة موجودة مسبقاً في السلة.');
+    const extra   = seed[service.id] || {};
+    const rating  = extra.rating || null;
+    const reviews = extra.reviews || [];
+
+    box.innerHTML = `
+      <h2>${service.title}</h2>
+      <p class="desc">${service.desc || '-'}</p>
+
+      <div class="info">
+        <span>⏱️ ${fmtTime(service.time)}</span>
+        <span>💰 ${service.price} ر.س</span>
+      </div>
+
+      <div class="rating">
+        ${starsHTML(rating)}
+      </div>
+
+      <p class="muted" style="margin-top:6px">التعليقات</p>
+      <ul class="reviews">
+        ${reviews.length
+          ? reviews.map(r=>`<li><strong>${r.name}</strong> ${r.text}</li>`).join('')
+          : '<li class="muted" style="text-align:center">لا توجد تعليقات بعد</li>'}
+      </ul>
+
+      <button id="addToCartBtn" class="btn">طلب الخدمة</button>
+    `;
+
+    // ✅ إصلاح الإضافة للسلة + التحويل مباشرة
+    document.getElementById('addToCartBtn').addEventListener('click', () => {
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+      // هل العنصر موجود مسبقًا؟
+      const exists = cart.find(item => Number(item.id) === Number(service.id));
+
+      if (!exists) {
+        // حاول نستخرج إيموجي من العنوان (أول حرف إن كان رمز)
+        const titleFirst = (service.title || '').trim()[0] || '';
+        const emojiGuess = /[\p{Emoji}\u2600-\u27BF]/u.test(titleFirst) ? titleFirst : '🧰';
+
+        cart.push({
+          id:        service.id,
+          title:     service.title,
+          price:     service.price,
+          time:      service.time || 'غير محدد',
+          emoji:     emojiGuess,
+          description: service.desc || '',
+          qty:       1
+        });
+        localStorage.setItem('cart', JSON.stringify(cart));
+      }
+
+      // التحويل مباشرة لصفحة السلة
+      window.location.href = 'chart.html';
+    });
   }
-
-  // تحويل المستخدم مباشرة إلى صفحة السلة
-  window.location.href = 'cart.html';
-});
-
-}
 </script>
+
 </body>
 </html>
+
