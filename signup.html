@@ -6,14 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="mihn_style.css">
 </head>
-<body>
+<body class="signup-page">
     
     <header class="site-header">
-  <div class="brand">
-    <a href="index.php" aria-label="الصفحة الرئيسية">
-      <img src="image/logo.jpg" alt="شعار مِهَن" class="logo">
-    </a>
-  </div>
+
+      <img src="assets/logo.jpg" alt="شعار مِهَن" class="logo">
+    
+     <!-- زر الخروج -->
+  <a href="index.html" aria-label="تسجيل الخروج" class="logout-btn">
+    <img src="image/logout.png" alt="خروج">
+  </a>
+
 </header>
     
   <div class="container">
@@ -22,12 +25,12 @@
 
    
 
-    <form action="login.html" method="get" >
+    <form id="signupForm" >
       <label>الاسم الكامل</label>
-      <input type="text" name="full_name" required >
+      <input type="text" name="full_name"  required >
 
       <label>البريد الإلكتروني</label>
-      <input type="email" name="email" required >
+      <input type="email" name="email"  required >
 
       <label>رقم الجوال</label>
       <input type="tel" name="phone" placeholder="مثال: 05XXXXXXXX" required >
@@ -53,7 +56,7 @@
     
     <footer class="site-footer" role="contentinfo" aria-label="تذييل الموقع">
     <div class="footer-inner">
-      <a href="mailto:contact@mihan.sa" class="footer-email">contact@mihn.sa</a>
+      <a href="mailto:contact@mihn.sa" class="footer-email">contact@mihn.sa</a>
       <span class="separator">•</span>
       <span>© 2025 مِهَن — جميع الحقوق محفوظة</span>
     </div>
@@ -69,6 +72,17 @@ toggle.addEventListener('click', () => {
   const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
   password.setAttribute('type', type);
   toggle.textContent = type === 'password' ? '🔒' : '🔓';
+});
+
+document.getElementById('signupForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const userType = document.querySelector('input[name="user_type"]:checked').value;
+
+  if (userType === 'provider') {
+    window.location.href = 'provider.html'; 
+  } else if (userType === 'recipient') {
+    window.location.href = 'services.html'; 
+  }
 });
 </script>
 
