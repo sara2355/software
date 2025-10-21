@@ -5,90 +5,51 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>مِهَن | السلة</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+
 <style>
 :root{
-  --bg:#e9e6e2;         /* نفس خلفية البروفايدر */
-  --card:#fff;
-  --text:#2d2d2d;
-  --muted:#555;
-  --chip:#E6D5B8;       /* الشريط الفاتح داخل الكارت */
-  --border:#8B4513;     /* إطار بني */
-  --accent:#5A8DA8;     /* الأزرق المعتمد */
-  --accent-hover:#4F7E97;
-  --danger:#C62828;
-  --danger-hover:#A61717;
-  --radius:20px;
-  --shadow:0 4px 12px rgba(0,0,0,.08);
-  --shadow-lg:0 8px 20px rgba(0,0,0,.15);
+  --bg:#e9e6e2; --card:#fff; --text:#2d2d2d; --muted:#555; --chip:#E6D5B8;
+  --accent:#5A8DA8; --accent-hover:#4F7E97;
+  --danger:#C62828; --danger-hover:#A61717;
+  --border:#8B4513; --radius:20px;
+  --shadow:0 4px 12px rgba(0,0,0,.08); --shadow-lg:0 8px 20px rgba(0,0,0,.15);
 }
-
 *{box-sizing:border-box}
-body{font-family:'Tajawal',Arial,sans-serif;background:var(--bg);margin:0;color:var(--text);display:flex;flex-direction:column;min-height:100vh}
-.site-header {
-    background: #d8d5d0;
-    border-bottom: 2px solid #b9b6b2;
-    padding: 15px 20px;
-    text-align: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    position: relative; /* حتى نقدر نثبت زر الخروج */
-  }
+body{font-family:'Tajawal',sans-serif;background:var(--bg);margin:0;color:var(--text);display:flex;flex-direction:column;min-height:100vh}
 
-  .logo {
-    width: 120px;
-  }
+/* Header */
+.site-header{
+  background:#d8d5d0;border-bottom:2px solid #b9b6b2;padding:15px 20px;text-align:center;position:relative;box-shadow:0 2px 6px rgba(0,0,0,.05)
+}
+.logo{width:120px}
+.logout-btn{position:absolute;right:20px;top:50%;transform:translateY(-50%)}
+.logout-btn img{width:55px;height:55px;cursor:pointer;transition:.3s}
+.logout-btn img:hover{transform:scale(1.1)}
+.back-link{
+  position:absolute;left:25px;top:25px;font-size:28px;color:#5A8DA8;text-decoration:none;font-weight:800;transition:.2s
+}
+.back-link:hover{color:#4F7E97;transform:translateX(-3px)}
 
-   .logout-btn {
-    position: absolute;
-    right: 20px; /* أقصى اليمين */
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  .logout-btn img {
-    width: 55px;
-    height: 55px;
-    cursor: pointer;
-    transition: transform 0.3s;
-  }
-
-  .logout-btn img:hover {
-    transform: scale(1.1);
-  }
-  
 main{padding:24px;flex:1}
-
 .page-title{display:flex;align-items:center;gap:10px;margin:0 0 18px;font-size:1.25rem;font-weight:800}
-.back-link{color:var(--accent);text-decoration:none;font-weight:700}
 
 .cart-wrap{display:grid;grid-template-columns:1fr 360px;gap:22px}
-@media (max-width: 980px){ .cart-wrap{grid-template-columns:1fr} }
+@media (max-width:980px){.cart-wrap{grid-template-columns:1fr}}
 
-/* بطاقة العنصر */
 .item-card{
-  background:var(--card);
-  border:2px solid var(--border);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  padding:18px;
-  margin-bottom:16px;
-  transition:.25s;
+  background:var(--card);border:2px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;margin-bottom:16px;transition:.25s
 }
 .item-card:hover{box-shadow:var(--shadow-lg);background:#F5F5DC}
-
 .item-header{display:flex;align-items:center;gap:10px;margin-bottom:8px}
 .item-header h3{margin:0;font-size:1.1rem}
 .item-emoji{font-size:22px}
-
 .item-desc{color:var(--muted);margin:6px 0 10px}
-.item-chip{
-  display:flex;justify-content:space-between;align-items:center;gap:10px;
-  background:var(--chip);padding:8px 12px;border-radius:12px;font-weight:700;color:#333
-}
+.item-chip{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--chip);padding:8px 12px;border-radius:12px;font-weight:700;color:#333}
 
 .item-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-.btn{
-  padding:10px 14px;border:none;border-radius:10px;cursor:pointer;
-  font-weight:700;text-decoration:none;display:inline-block;text-align:center
-}
+.btn{padding:10px 14px;border:none;border-radius:10px;cursor:pointer;font-weight:700;text-decoration:none;display:inline-block;text-align:center}
 .btn-blue{background:var(--accent);color:#fff}
 .btn-blue:hover{background:var(--accent-hover)}
 .btn-red{background:var(--danger);color:#fff}
@@ -96,14 +57,8 @@ main{padding:24px;flex:1}
 .qty-box{display:flex;align-items:center;gap:8px}
 .qty-input{width:70px;padding:8px;border:1px solid #ccc;border-radius:10px;text-align:center;font-weight:700}
 
-/* الملخص والدفع */
 .summary{
-  background:var(--card);
-  border:2px solid var(--border);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  padding:18px;
-  height:fit-content;
+  background:var(--card);border:2px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;height:fit-content
 }
 .summary h4{margin:0 0 12px}
 .total-row{display:flex;justify-content:space-between;font-weight:800;margin:10px 0 16px}
@@ -111,59 +66,31 @@ main{padding:24px;flex:1}
 .pay-methods label{display:flex;align-items:center;gap:8px;cursor:pointer}
 .info{background:#fff8e1;border:1px solid #f1df9a;color:#7a5d00;padding:10px;border-radius:10px;margin:10px 0;font-size:.95rem}
 
-.empty{
-  background:#fff;border:2px dashed #b9b6b2;border-radius:16px;padding:26px;text-align:center;
-  color:#666
-}
-.back-link {
-  position: absolute;
-  left: 25px;
-  top: 25px;
-  font-size: 28px;
-  color: #5A8DA8; /* الأزرق المعتمد */
-  text-decoration: none;
-  font-weight: 800;
-  transition: 0.2s;
-}
+.empty{background:#fff;border:2px dashed #b9b6b2;border-radius:16px;padding:26px;text-align:center;color:#666}
 
-.back-link:hover {
-  color: #4F7E97;  /* الأزرق الغامق عند المرور */
-  transform: translateX(-3px);
-}
-
-footer{
-  background:#d8d5d0;border-top:2px solid #b9b6b2;padding:15px;text-align:center;
-  color:#4b4b4b;font-size:15px;box-shadow:0 -2px 6px rgba(0,0,0,.05)
-}
-footer a{color:#3e3e3e;font-weight:bold;text-decoration:none}
+.site-footer{background:#d8d5d0;border-top:2px solid #b9b6b2;padding:15px;text-align:center;color:#4b4b4b;font-size:15px;box-shadow:0 -2px 6px rgba(0,0,0,.05)}
+.site-footer a{color:#3e3e3e;font-weight:bold;text-decoration:none}
 .separator{margin:0 8px;color:#999}
 </style>
 </head>
 <body>
 
-
 <header class="site-header">
-
- <a href="services.html" class="back-link">← </a>
-  <!-- شعار الموقع -->
-    <img src="image/logo.jpg" alt="شعار مِهَن" class="logo">
-
-  <!-- زر الخروج -->
+  <a href="services.html" class="back-link">←</a>
+  <img src="image/logo.jpg" alt="شعار مِهَن" class="logo">
   <a href="index.html" aria-label="تسجيل الخروج" class="logout-btn">
     <img src="image/logout.png" alt="خروج">
   </a>
-
-
 </header>
 
 <main>
   <h1 class="page-title">🧺 سلة المشتريات</h1>
 
   <div class="cart-wrap">
-    <!-- قائمة العناصر -->
+    <!-- العناصر -->
     <section id="cartItems"></section>
 
-    <!-- الملخص وطرق الدفع -->
+    <!-- الملخص -->
     <aside class="summary">
       <h4>ملخص الطلب</h4>
       <div class="total-row"><span>الإجمالي</span><span id="totalPrice">0 ر.س</span></div>
@@ -182,18 +109,14 @@ footer a{color:#3e3e3e;font-weight:bold;text-decoration:none}
   </div>
 </main>
 
-<footer>
-  <a href="mailto:contact@mihn.sa">contact@mihn.sa</a>
+<footer class="site-footer">
+  <a href="mailto:contact@mihan.sa" class="footer-email">contact@mihan.sa</a>
   <span class="separator">•</span>
   <span>© 2025 مِهَن — جميع الحقوق محفوظة</span>
 </footer>
 
 <script>
-// ====================== بيانات السلة ======================
-/*
-نتوقع أن صفحة الخدمات تضيف عناصر للسلة بهذا الشكل:
-cart = [{ id, title, price, time, emoji, qty }]
-*/
+// مفاتيح التخزين
 const cartKey   = 'cart';
 const ordersKey = 'orders';
 
@@ -209,7 +132,7 @@ const totalEl = document.getElementById('totalPrice');
 const payBox  = document.getElementById('payMethods');
 const btnPay  = document.getElementById('checkoutBtn');
 
-// رسم العناصر
+// رسم المحتوى
 function renderCart(){
   const cart = getCart();
   listEl.innerHTML = '';
@@ -217,7 +140,7 @@ function renderCart(){
   if(cart.length === 0){
     listEl.innerHTML = `
       <div class="empty">
-        السلة فارغة حاليًا. <br> ابدأ بإضافة خدمات من <a href="services.html" class="back-link">صفحة الخدمات</a>.
+        السلة فارغة حاليًا. <br> ابدأ بإضافة خدمات من <a href="services.html" class="btn btn-blue" style="margin-top:10px">صفحة الخدمات</a>.
       </div>
     `;
     totalEl.textContent = '0 ر.س';
@@ -259,7 +182,7 @@ function renderCart(){
   totalEl.textContent = `${total} ر.س`;
 }
 
-// حفظ تعديل الكمية / حذف
+// أحداث تعديل/حذف
 listEl.addEventListener('click', (e)=>{
   const btn = e.target.closest('button');
   if(!btn) return;
@@ -268,9 +191,11 @@ listEl.addEventListener('click', (e)=>{
   let cart = getCart();
 
   if(btn.getAttribute('data-action') === 'del'){
+    if(!confirm('هل أنت متأكد من أنك تريد حذف هذا الطلب؟')) return;
     cart.splice(idx,1);
     setCart(cart);
     renderCart();
+    alert('تم حذف الطلب بنجاح');
     return;
   }
 
@@ -285,15 +210,29 @@ listEl.addEventListener('click', (e)=>{
   }
 });
 
-// إتمام الدفع -> تحويل مباشر لصفحة الطلبات (بدون أي تحقق)
-btnPay.addEventListener('click', () => {
-  // لو تبغين بس تحويل بدون أي شغل:
-  window.location.href = 'requests.html';  // أو requests.html إذا هذا اسم صفحتك
+// الدفع → إنشاء طلب ثم تحويل مباشر
+btnPay.addEventListener('click', ()=>{
+  const cart = getCart();
+
+  // (حسب طلبك) تحويل مباشر بعد إنشاء طلب بدون أي تحقق إضافي:
+  const total = cart.reduce((s,it)=> s + (Number(it.price)||0) * (Number(it.qty)||1), 0);
+  const orders = getOrders();
+  orders.push({
+    id: Date.now(),
+    items: cart,
+    total,
+    method: (payBox.querySelector('input[name="pm"]:checked')||{}).value || '—',
+    createdAt: new Date().toISOString(),
+    status: 'جديد'
+  });
+  setOrders(orders);
+
+  setCart([]); // تفريغ السلة
+  window.location.href = 'requests.html';
 });
 
-// رسم أولي للسلة
+// أول تحميل
 renderCart();
-
 </script>
 </body>
 </html>
