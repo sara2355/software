@@ -5,263 +5,358 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>مِهَن | الخدمات</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#e0e0e0;
-  --card:#fff;
-  --text:#333;
-  --muted:#555;
-  --chip:#dddddd;
-  --accent:#007BFF;       /* نفس لون زر التعديل عندك */
-  --accent-hover:#005dc6;
-  --danger:#dc3545;       /* نفس لون الحذف */
-  --danger-hover:#b71c1c;
-  --dark:#222;
-  --radius:20px;
-  --shadow:0 4px 12px rgba(0,0,0,.08);
-  --shadow-lg:0 8px 20px rgba(0,0,0,.15);
+  :root{
+    --bg:#e9e6e2;
+    --card:#fff;
+    --text:#2d2d2d;
+    --muted:#555;
+    --chip:#E6D5B8;
+      --accent:#5A8DA8;          /* الأزرق الناعم */
+  --accent-hover:#4F7E97; 
+    --danger:#C62828;
+    --danger-hover:#A61717;
+    --border:#8B4513;         /* البني الغامق مثل البروفايدر */
+    --radius:20px;
+    --shadow:0 4px 12px rgba(0,0,0,.08);
+  }
+.site-header {
+    background: #d8d5d0;
+    border-bottom: 2px solid #b9b6b2;
+    padding: 15px 20px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    position: relative; /* حتى نقدر نثبت زر الخروج */
+  }
+
+  .logo {
+    width: 120px;
+  }
+
+   .logout-btn {
+    position: absolute;
+    right: 20px; /* أقصى اليمين */
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .logout-btn img {
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+
+  .logout-btn img:hover {
+    transform: scale(1.1);
+  }
+      background: #d8d5d0;
+    border-bottom: 2px solid #b9b6b2;
+    padding: 15px 20px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+  .logo {
+    width: 120px;
+  }
+  .logout-btn {
+    position: absolute;
+    right: 20px; /* أقصى اليمين */
+    top: 50%;
+    transform: translateY(-50%);
+  }
+    .logout-btn img {
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+
+  .logout-btn img:hover {
+    transform: scale(1.1);
+  }
+  
+  *{box-sizing:border-box}
+  body{font-family:"Tajawal",sans-serif;background:var(--bg);margin:0;color:var(--text);}
+  header{padding:14px 18px;background:#f5f5f5;border-bottom:1px solid #d9d6d2}
+  header .brand img{width:100px}
+  main{padding:24px;max-width:1200px;margin:auto}
+
+  /* شريط علوي: بحث + فلاتر + سلة */
+  /* أزرار البحث وقائمة الطلبات */
+.toolbar button,
+.cart-btn.orders {
+  background-color: #5A8DA8;         /* نفس لون عرض التفاصيل */
+  color: #fff;
+  font-family: "Tajawal", sans-serif;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
-*{box-sizing:border-box}
-body{font-family: "Tajawal", Arial, sans-serif; background:var(--bg); margin:0; min-height:100vh; display:flex; flex-direction:column;}
-header{background:#f5f5f5; padding:16px 20px; border-bottom:1px solid #e8e8e8;}
-header .brand{font-weight:800; color:#444}
-main{padding:24px; flex:1;}
-
-.top-bar{display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:16px;}
-.search{flex:1; min-width:240px; display:flex; gap:8px;}
-.search input{
-  flex:1; padding:12px 14px; border:1px solid #ccc; border-radius:12px; font-size:15px; outline:none;
+.toolbar button:hover,
+.cart-btn.orders:hover {
+  background-color: #4F7E97;        /* درجة أغمق عند المرور */
 }
-.search button{padding:12px 16px; border:none; border-radius:12px; background:var(--accent); color:#fff; font-weight:700; cursor:pointer}
-.search button:hover{background:var(--accent-hover);}
-
-.filters{display:flex; gap:8px; flex-wrap:wrap}
-.filter-chip{
-  background:var(--card); border:1px solid #ddd; padding:10px 12px; border-radius:12px; cursor:pointer; font-weight:600; color:#444;
+/* توحيد الخط في شريط البحث والفلاتر */
+.toolbar, 
+.toolbar input, 
+.toolbar select, 
+.toolbar button {
+  font-family: "Tajawal", sans-serif;
+  font-weight: 700;       /* نفس الوزن الموجود في عرض التفاصيل */
+  font-size: 15px;
+  color: #2d2d2d;
 }
-.filter-chip.active{background:var(--accent); color:#fff; border-color:var(--accent);}
 
-.services-container{display:flex; flex-wrap:wrap; gap:20px; justify-content:center;}
+  .cart-btn{
+    padding:10px 14px;border-radius:12px;background:#2d2d2d;color:#fff;text-decoration:none;font-weight:800;display:inline-flex;align-items:center;gap:8px
+  }
+  .badge{background:#ff5252;color:#fff;border-radius:999px;padding:2px 8px;font-size:.85rem}
 
-/* زر قائمة الطلبات */
-.orders-btn{
-  padding: 12px 16px;
-  background: var(--accent);
-  color:#fff;
-  border-radius:12px;
-  font-weight:700;
-  text-decoration:none;
-  white-space:nowrap;
+  /* شبكة البطاقات */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px}
+  .card{
+    background:var(--card);border:2px solid var(--border);border-radius:20px;box-shadow:var(--shadow);
+    padding:20px;text-align:center;transition:.25s
+  }
+  .card:hover{transform:translateY(-4px);background:#F5F5DC;color:#3e3e3e}
+  .card h3{margin:0 0 10px;font-size:1.6rem}
+  .card p{color:var(--muted);line-height:1.7;margin:0 0 14px}
+  .info{
+    display:flex;justify-content:space-between;align-items:center;background:var(--chip);border-radius:12px;
+    padding:10px 14px;font-weight:800;margin-bottom:10px
+  }
+  .btn{display:inline-block;padding:10px 14px;border:none;border-radius:10px;font-weight:800;cursor:pointer;text-decoration:none}
+  .primary{background:var(--accent);color:#fff}
+  .primary:hover{background:var(--accent-hover)}
+  /* زر الإضافة إلى السلة */
+.add-to-cart {
+  background-color: #4a675a; /* أخضر مطفي ناعم */
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-family: "Tajawal", sans-serif; /* نفس الخط المستخدم */
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
 }
-.orders-btn:hover{ background: var(--accent-hover); }
 
-/* القوائم المنسدلة */
-.filters select{
-  appearance:none;
-  padding:10px 12px;
-  border:1px solid #ccc;
-  border-radius:12px;
-  background:#fff;
-  min-width:150px;
-  font-weight:600;
-  color:#444;
+/* زر البحث */
+#searchBtn {
+  background-color: #5A8DA8;         /* نفس لون عرض التفاصيل */
+  color: #fff;
+  font-family: "Tajawal", sans-serif;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
-.top-bar{ align-items:center; }
-.spacer{ flex:1; } /* يدفع زر الطلبات للطرف */
-
-
-
-
-
-/* الكارت */
-.service-card{
-  background:var(--card); padding:20px; border-radius:var(--radius);
-  box-shadow:var(--shadow); width:290px; display:flex; flex-direction:column;
-  transition:transform .25s, box-shadow .25s;
-}
-.service-card:hover{transform:translateY(-5px); box-shadow:var(--shadow-lg);}
-.service-header{display:flex; align-items:center; gap:12px; margin-bottom:8px;}
-.service-header img{width:48px; height:48px; object-fit:contain; filter:grayscale(100%); /* موحد مع الشعار الرمادي */ }
-.service-card h3{margin:0; color:var(--text); font-size:1.15rem;}
-.service-card p{margin:6px 0; color:var(--muted); font-size:.96rem; line-height:1.5}
-
-.service-info{
-  display:flex; justify-content:space-between; align-items:center; gap:8px;
-  background:var(--chip); padding:8px 12px; border-radius:12px; margin-top:10px; color:#333; font-weight:700;
-}
-.service-actions{
-  display:flex;
-  justify-content:center;  /* الزر بالنص */
-  margin-top:10px;
-  gap:8px;
-  flex-wrap:wrap;
+#searchBtn:hover {
+  background-color: #4F7E97;
 }
 
 
-.btn{
-  padding:10px 14px; border:none; border-radius:10px; cursor:pointer; font-weight:700; text-decoration:none; display:inline-block; text-align:center;
+.add-to-cart:hover {
+  background-color: #3e594f;           /* أغمق شوي عند المرور */
 }
-.primary{background:var(--accent); color:#fff}
-.primary:hover{background:var(--accent-hover)}
-.edit-btn{background:var(--accent); color:#fff}
-.edit-btn:hover{background:#555}
-.delete-btn{background:var(--danger); color:#fff}
-.delete-btn:hover{background:var(--danger-hover)}
 
-footer{ text-align:center; padding:18px; background:var(--dark); color:#fff; font-size:.9rem }
-footer a{color:#fff; text-decoration:none}
-footer .separator{margin:0 8px}
+
+
+  .success{background:#198754;color:#fff}
+  .success:hover{filter:brightness(.95)}
+  .site-footer {
+    background: #d8d5d0;
+    border-top: 2px solid #b9b6b2;
+    padding: 15px;
+    text-align: center;
+    color: #4b4b4b;
+    font-size: 15px;
+    box-shadow: 0 -2px 6px rgba(0,0,0,0.05);
+  }
+    .footer-email {
+    color: #3e3e3e;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .separator {
+    margin: 0 8px;
+    color: #999;
+  }
 </style>
 </head>
 <body>
-
 <header class="site-header">
-  <div class="brand">
-    <a href="index.html" aria-label="الصفحة الرئيسية">
-      <img src="image/logo.jpg" alt="شعار مِهَن" class="logo" style="width:100px;">
-    </a>
-  </div>
+  <!-- شعار الموقع -->
+    <img src="image/logo.jpg" alt="شعار مِهَن" class="logo">
+
+  <!-- زر الخروج -->
+  <a href="index.html" aria-label="تسجيل الخروج" class="logout-btn">
+    <img src="image/logout.png" alt="خروج">
+  </a>
 </header>
 
+
 <main>
-  <!-- شريط البحث والفلاتر -->
-  <div class="top-bar">
+  <!-- شريط الأدوات -->
+  <div class="toolbar">
     <div class="search">
-      <input type="search" placeholder="ابحث عن خدمة (تنظيف، سباكة، صيانة أجهزة…)" aria-label="بحث">
-      <button type="button">بحث</button>
+      <input id="q" type="search" placeholder="ابحث عن خدمة… (كهرباء، سباكة، تنظيف…)">
+      <button id="searchBtn" type="button">بحث</button>
     </div>
 
-  <div class="filters" aria-label="فلاتر">
-  <select id="typeFilter">
-    <option value="">كل الأنواع</option>
-    <!-- تُملأ تلقائيًا من البيانات -->
-  </select>
+    <div class="filters">
+      <select id="typeFilter">
+        <!-- يُملأ تلقائيًا بالأنواع -->
+      </select>
+    </div>
 
-  <select id="priceFilter">
-    <option value="">كل الأسعار</option>
-    <option value="≤100">≤ 100 ر.س</option>
-    <option value="100-200">100–200 ر.س</option>
-    <option value="≥200">≥ 200 ر.س</option>
-  </select>
-
-  <select id="ratingFilter">
-    <option value="">كل التقييمات</option>
-    <option value="3">3+ نجوم</option>
-    <option value="4">4+ نجوم</option>
-    <option value="4.5">4.5+ نجوم</option>
-  </select>
+<div style="display:flex; gap:10px; align-items:center;">
+  <a class="cart-btn orders" href="requests.html">📄 قائمة الطلبات</a>
+  <a class="cart-btn" href="cart.html" id="cartBtn">🛒 السلة <span class="badge" id="cartCount">0</span></a>
+  
 </div>
 
-<div class="spacer"></div>
-
-<!-- زر قائمة الطلبات -->
-<a class="orders-btn" href="orders.html">قائمة الطلبات</a>
 
   </div>
-  
-<!-- صندوق رسالة نجاح/خطأ -->
-<div id="msg" class="message" style="display:none;"></div>
 
-<!-- شريط فرعي للفلاتر الديناميكية (يظهر عند اختيار نوع فلتر) -->
-<div id="subFilters" class="filters" style="margin-bottom:12px;"></div>
-
-
-
-
-  <!-- قائمة الخدمات -->
-<section id="servicesContainer" class="services-container">
-  </section>
+  <!-- الشبكة -->
+  <section class="grid" id="grid"></section>
 </main>
 
-<footer class="site-footer" role="contentinfo" aria-label="تذييل الموقع">
-    <div class="footer-inner">
-      <a href="mailto:contact@mihan.sa" class="footer-email">contact@mihn.sa</a>
-      <span class="separator">•</span>
-      <span>© 2025 مِهَن — جميع الحقوق محفوظة</span>
-    </div>
+<footer class="site-footer">
+  <a href="mailto:contact@mihan.sa" class="footer-email">contact@mihan.sa</a>
+  <span class="separator">•</span>
+  <span>© 2025 مِهَن — جميع الحقوق محفوظة</span>
 </footer>
+
 <script>
-// ===== بيانات الخدمات الستة =====
+/* =========================
+   1) بيانات ثابتة: 17 خدمة
+   ========================= */
 const services = [
-  {id:1, title:"صيانة المنازل", category:"صيانة المنازل", description:"إصلاحات كهرباء وسباكة وتكييف بشكل عاجل.", price:120, rating:4.5, provider:"فريق الصيانة السريعة", icon:"image/maintenance-1.png"},
-  {id:2, title:"التنظيف", category:"التنظيف", description:"تنظيف منازل وشقق ومكاتب باحترافية عالية.", price:90, rating:4.2, provider:"مؤسسة النظافة المثالية", icon:"image/cleaning-1.png"},
-  {id:3, title:"خدمات السيارات", category:"خدمات السيارات", description:"غسيل وصيانة خفيفة في موقع العميل.", price:70, rating:4.0, provider:"CarCare Express", icon:"image/car-service-1.png"},
-  {id:4, title:"صيانة الأجهزة", category:"صيانة الأجهزة", description:"إصلاح الأجهزة المنزلية والمكيفات.", price:60, rating:4.7, provider:"FixIt Tech", icon:"image/computer-support-1.png"},
-  {id:5, title:"التوصيل والمشاوير", category:"التوصيل والمشاوير", description:"توصيل الطلبات والمستندات داخل المدينة.", price:25, rating:4.1, provider:"مرسال المدينة", icon:"image/delivery-1.png"},
-  {id:6, title:"المناسبات والضيافة", category:"المناسبات والضيافة", description:"تزيين فعاليات ومساعدة في الضيافة.", price:150, rating:4.4, provider:"Event Touch", icon:"image/event-1.png"},
+  // صيانة المنازل
+  {id:1,  title:"🔧 سباكة",                  type:"صيانة المنازل", price:250, time:"4:00",  desc:"إصلاح وصيانة الأنابيب، تسليك المجاري، وتركيب صنابير ومحابس المياه."},
+  {id:2,  title:"💡 كهرباء",                 type:"صيانة المنازل", price:180, time:"5:44", desc:"صيانة وإصلاح الأعطال الكهربائية المنزلية وتركيب المفاتيح والمخارج."},
+  {id:3,  title:"❄️ تكييف",                  type:"صيانة المنازل", price:190, time:"4:00", desc:"تنظيف وفحص المكيفات وإصلاح التسريبات وتبديل الفلاتر."},
+  {id:4,  title:"🧱 دهانات وصيانة عامة",     type:"صيانة المنازل", price:120, time:"3:40", desc:"أعمال صيانة منزلية عامة مع تحسينات وتشطيب بسيط."},
+
+  // التنظيف
+  {id:5,  title:"🧹 تنظيف المنازل",           type:"التنظيف",       price:80,  time:"7:00", desc:"تنظيف شامل للغرف والمطابخ والحمامات وإزالة الغبار."},
+  {id:6,  title:"🧽 تنظيف المكاتب",           type:"التنظيف",       price:50,  time:"2:00", desc:"تنظيف المكاتب والأسطح وتعقيم الأدوات."},
+
+  // خدمات السيارات
+  {id:7,  title:"🧼 غسيل السيارة",           type:"خدمات السيارات", price:60,  time:"3:40", desc:"غسيل شامل للسيارة من الداخل والخارج في موقع العميل."},
+  {id:8,  title:"🚗 تبديل الإطارات",          type:"خدمات السيارات", price:40,  time:"2:00", desc:"تبديل وتركيب الإطارات وخدمة بنشر متنقلة."},
+  {id:9,  title:"🔧 صيانة سريعة",             type:"خدمات السيارات", price:40,  time:"9:00", desc:"إصلاحات بسيطة مثل المصابيح والزيوت."},
+
+  // صيانة الأجهزة
+  {id:10, title:"📱 إصلاح الهواتف",          type:"صيانة الأجهزة",  price:110, time:"2:00", desc:"صيانة هواتف مع استبدال البطارية أو الشاشة."},
+  {id:11, title:"💻 إصلاح الحواسيب",         type:"صيانة الأجهزة",  price:120, time:"3:40", desc:"تنظيف الفيروسات/ترقية القطع/إصلاح الأعطال."},
+  {id:12, title:"📺 إصلاح شاشات وأجهزة",     type:"صيانة الأجهزة",  price:170, time:"10:00",desc:"صيانة الأجهزة الإلكترونية المنزلية."},
+
+  // التوصيل
+  {id:13, title:"🚚 توصيل الطلبات",           type:"التوصيل",        price:80,  time:"12:00",desc:"توصيل مستلزمات وطلبات داخل المدينة بسرعة."},
+
+  // الخدمات الشخصية / الضيافة / الطهي
+  {id:14, title:"🚕 المشاوير الشخصية",        type:"الخدمات الشخصية", price:100, time:"3:40", desc:"نقل شخصي لمشاوير عاجلة بموثوقية."},
+  {id:15, title:"🍳 الطهي المنزلي",           type:"الخدمات الشخصية", price:200, time:"5:00",  desc:"إعداد وجبات منزلية حسب الطلب."},
+  {id:16, title:"☕ الضيافة",                 type:"الخدمات الشخصية", price:200, time:"3:40",  desc:"تنظيم الضيافة للمناسبات الصغيرة."},
+  {id:17, title:"💄 خدمات التجميل المنزلية",  type:"الخدمات الشخصية", price:200, time:"5:00",  desc:"تجميل منزلي: تصفيف شعر ومكياج وعناية بالبشرة."},
 ];
 
-// حفظ للديتيلز
-localStorage.setItem('services', JSON.stringify(services));
+/* ============
+   2) سلة الشراء
+   ============ */
+const CART_KEY = 'cart';
+function getCart(){ try{ return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); }catch{ return []; } }
+function setCart(arr){ localStorage.setItem(CART_KEY, JSON.stringify(arr)); updateCartCount(); }
+function addToCart(id){
+  const s = services.find(x=>x.id===id);
+  if(!s) return;
+  const cart = getCart();
+  // لو موجود نزود الكمية، وإلا نضيف عنصر جديد
+  const i = cart.findIndex(x=>x.id===id);
+  if(i>-1) cart[i].qty += 1; else cart.push({id:s.id,title:s.title,price:s.price,qty:1});
+  setCart(cart);
+  alert('✅ تمت إضافة الخدمة إلى السلة');
+}
+function updateCartCount(){
+  const count = getCart().reduce((sum,i)=>sum+i.qty,0);
+  document.getElementById('cartCount').textContent = count;
+}
 
-// عناصر DOM
-const container   = document.getElementById('servicesContainer');
-const searchInput = document.querySelector('.search input');
-const typeSel     = document.getElementById('typeFilter');
-const priceSel    = document.getElementById('priceFilter');
-const ratingSel   = document.getElementById('ratingFilter');
+/* =========================
+   3) بناء الفلاتر والبطاقات
+   ========================= */
+const grid = document.getElementById('grid');
+const q    = document.getElementById('q');
+const btn  = document.getElementById('searchBtn');
+const typeSel = document.getElementById('typeFilter');
 
-// ملء قائمة الأنواع تلقائيًا
-[...new Set(services.map(s=>s.category))].forEach(cat=>{
-  const opt = document.createElement('option');
-  opt.value = cat; opt.textContent = cat;
-  typeSel.appendChild(opt);
-});
+// بناء قائمة الأنواع
+const types = [...new Set(services.map(s=>s.type))];
+typeSel.innerHTML = `<option value="">كل الفئات</option>` + types.map(t=>`<option value="${t}">${t}</option>`).join('');
 
-// حالة الفلاتر
-let state = { query:'', type:'', price:'', rating:'' };
+let state = {q:'', type:''};
 
-// بناء الكروت
-function displayServices(){
-  container.innerHTML = '';
+function render(){
+  grid.innerHTML = '';
   const list = services.filter(s=>{
-    const q = state.query.trim().toLowerCase();
-    const byQuery  = !q || (s.title + ' ' + s.description).toLowerCase().includes(q);
-    const byType   = !state.type || s.category === state.type;
-
-    let byPrice = true;
-    if (state.price === '≤100') byPrice = s.price <= 100;
-    else if (state.price === '100-200') byPrice = s.price >= 100 && s.price <= 200;
-    else if (state.price === '≥200') byPrice = s.price >= 200;
-
-    const byRating = !state.rating || s.rating >= Number(state.rating);
-
-    return byQuery && byType && byPrice && byRating;
+    const byQ = !state.q || (s.title+s.desc+s.type).toLowerCase().includes(state.q);
+    const byT = !state.type || s.type === state.type;
+    return byQ && byT;
   });
-
-  if (!list.length){
-    container.innerHTML = "<p style='text-align:center;font-weight:bold;'>لا توجد خدمات مطابقة.</p>";
-    return;
-  }
+  
+  
 
   list.forEach(s=>{
-    const el = document.createElement('article');
-    el.className = 'service-card';
-   el.innerHTML = `
-  <div class="service-header">
-    <img src="${s.icon}" alt="أيقونة ${s.title}">
-    <h3>${s.title}</h3>
-  </div>
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <h3>${s.title}</h3>
+      <div class="info">
+        <span>⏱️ ${s.time}</span>
+        <span>💰 ${s.price} ر.س</span>
+      </div>
+      <div style="display:flex;gap:8px;justify-content:center">
+        <a class="btn primary" href="details.html?id=${s.id}">عرض التفاصيل</a>
+   <button class="add-to-cart" onclick="addToCart(${s.id})">إضافة إلى السلة</button>
 
-  <div class="service-actions">
-    <a class="btn primary" href="details.html?id=${s.id}">عرض التفاصيل</a>
-  </div>
-`;
 
-    container.appendChild(el);
+    `;
+    grid.appendChild(card);
   });
 }
 
-// أحداث البحث والفلاتر
-searchInput.addEventListener('input', ()=>{ state.query = searchInput.value; displayServices(); });
-typeSel.addEventListener('change',   ()=>{ state.type  = typeSel.value;     displayServices(); });
-priceSel.addEventListener('change',  ()=>{ state.price = priceSel.value;    displayServices(); });
-ratingSel.addEventListener('change', ()=>{ state.rating= ratingSel.value;   displayServices(); });
+// أحداث
+btn.addEventListener('click', ()=>{ state.q = q.value.trim().toLowerCase(); render(); });
+q.addEventListener('input', ()=>{ state.q = q.value.trim().toLowerCase(); render(); });
+typeSel.addEventListener('change', ()=>{ state.type = typeSel.value; render(); });
 
 // أول تحميل
-displayServices();
-</script>
+updateCartCount();
+render();
 
+// نحفظ الخدمات للـ details.html (يقرأها من localStorage)
+localStorage.setItem('services', JSON.stringify(services));
+
+
+</script>
 </body>
 </html>
