@@ -22,6 +22,7 @@ html,body{
   background:var(--white);
   border-radius:12px;
   box-shadow:0 6px 22px rgba(0,0,0,.08);
+  border: 1px solid rgba(90, 141, 168, 0.4);
 }
 
 h2{margin:0 0 14px; font-weight:700; font-size:22px}
