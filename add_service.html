@@ -25,18 +25,43 @@
         text-align:center;
         font-size:24px;
     }
+    .site-footer {
+    background: #d8d5d0;
+    border-top: 2px solid #b9b6b2;
+    padding: 15px;
+    text-align: center;
+    color: #4b4b4b;
+    font-size: 15px;
+    box-shadow: 0 -2px 6px rgba(0,0,0,0.05);
+  }
+   .site-header {
+    background: #d8d5d0;
+    border-bottom: 2px solid #b9b6b2;
+    padding: 15px 20px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+  .logo {
+    width: 120px;
+  }
+  .footer-email {
+    color: #3e3e3e;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .separator {
+    margin: 0 8px;
+    color: #999;
+  }
 </style>
 </head>
 <body>
 
 <header class="site-header">
-  <div class="brand">
-    <a href="index.html" aria-label="الصفحة الرئيسية">
-      <img src="image/logo.jpg" alt="شعار مِهَن" class="logo" style="width:100px;">
-    </a>
-  </div>
+  <a href="index.html" aria-label="الصفحة الرئيسية">
+    <img src="image/logo.jpg" alt="شعار مِهَن" class="logo">
+  </a>
 </header>
-
 <main>
    
   <form id="addServiceForm">
@@ -72,11 +97,11 @@
 </main>
 
 <footer class="site-footer" role="contentinfo" aria-label="تذييل الموقع">
-  <div class="footer-inner">
-    <a href="mailto:contact@mihan.sa" class="footer-email">contact@mihn.sa</a>
-    <span class="separator">•</span>
-    <span>© 2025 مِهَن — جميع الحقوق محفوظة</span>
-  </div>
+    <div class="footer-inner">
+      <a href="mailto:contact@mihan.sa" class="footer-email">contact@mihn.sa</a>
+      <span class="separator">•</span>
+      <span>© 2025 مِهَن — جميع الحقوق محفوظة</span>
+    </div>
 </footer>
 
 <script>
