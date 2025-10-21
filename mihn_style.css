@@ -82,30 +82,37 @@ body { display: flex; flex-direction: column;
 min-height: 100vh;}
 
 
- /* ===== Header ===== */
+/* ===== Header ===== */
   .site-header {
     background: #d8d5d0;
     border-bottom: 2px solid #b9b6b2;
     padding: 15px 20px;
     text-align: center;
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    position: relative; 
   }
   .logo {
     width: 120px;
   }
 
-.brand {
-  display: flex;
- justify-content: center; 
-  align-items: center;
-}
 
+.logout-btn {
+    position: absolute;
+    right: 20px; /* أقصى اليمين */
+    top: 50%;
+    transform: translateY(-50%);
+  }
 
+  .logout-btn img {
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
 
-.logo:hover {
-  transform: scale(1.05);
-}
-
+  .logout-btn img:hover {
+    transform: scale(1.1);
+  }
 
  /* ===== Footer ===== */
   .site-footer {
@@ -126,3 +133,24 @@ min-height: 100vh;}
     margin: 0 8px;
     color: #999;
   }
+.login-page .container {
+  max-width: 420px;
+  padding: 28px;
+}
+
+
+.signup-page .container {
+  max-width: 520px;         
+  padding: 36px 32px;        
+}
+
+    
+.signup-page h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.signup-page .desc {
+  font-size: 15px;
+  margin-bottom: 22px;
+}
