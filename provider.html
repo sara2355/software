@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="mihn_style.css">
 <style>
   body {
-    font-family: 'Tajawal', sans-serif;
     background-color: #e9e6e2;
     margin: 0;
     padding: 0;
@@ -15,7 +14,7 @@
     
   }
 main { padding:30px; flex: 1;  }
-.top-bar {  justify-content:flex-end; margin-bottom:20px; flex-direction:column; align-items:flex-end; gap:10px; }
+.top-bar { justify-content:flex-end; margin-bottom:20px; flex-direction:column; align-items:flex-end; gap:10px; }
 .add-btn {
     padding: 10px 20px;
     background: var(--accent, #007BFF);
@@ -26,6 +25,8 @@ main { padding:30px; flex: 1;  }
     width: auto; 
     text-decoration:none;
     cursor:pointer;
+      font-family: "Tajawal", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
 }
 .add-btn:hover { filter: brightness(0.9); }
 .services-container { display:flex; flex-wrap:wrap; gap:20px; justify-content:center; }
@@ -64,9 +65,12 @@ border: 2px solid #8B4513; /* 🔹 بني غامق */
     display:inline-block;
 
 }
-.edit-btn { background: var(--accent, #007BFF); color: var(--white); }
-.edit-btn:hover { background: #555; }
-.delete-btn { background: #C62828 ; color: #fff; }
+.edit-btn { background: var(--accent, #007BFF); color: var(--white);  font-family: "Tajawal", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+ }
+.edit-btn:hover { background: #555;  font-family: "Tajawal", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+ }
+.delete-btn { background: #C62828 ; color: #fff;   font-family: "Tajawal", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+ }
 .delete-btn:hover { background: #A61717; }
 .message {
     text-align:center;
@@ -159,11 +163,14 @@ border: 2px solid #8B4513; /* 🔹 بني غامق */
 <main>
     <div class="top-bar">
         <button class="add-btn" onclick="window.location.href='add_service.html'">➕ إضافة خدمة جديدة</button>
-        <button class="add-btn" onclick="window.location.href='view-requests.html'">📄 عرض الطلبات</button>
+        <button class="add-btn" onclick="window.location.href='view-requests.html'">📄 قائمة الطلبات</button>
     </div>
+    
+    
 
     <div class="message" id="msg" style="display:none;"></div>
     <div class="services-container" id="servicesContainer"></div>
+    
 </main>
 
 <footer class="site-footer" role="contentinfo" aria-label="تذييل الموقع">
@@ -203,8 +210,9 @@ function displayServices() {
             <h3>${s.title}</h3>
             <p>${s.description}</p>
             <div class="service-info">
-                <span>💰 ${s.price} ريال</span>
                 <span>⏱️ ${s.time}</span>
+                            <span>💰 ${s.price} ريال</span>
+
             </div>
             <button class="btn edit-btn" onclick="editService(${s.id})">️ تعديل</button>
             <button class="btn delete-btn" onclick="deleteService(${s.id})">️ حذف</button>
